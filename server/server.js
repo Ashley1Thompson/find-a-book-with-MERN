@@ -22,12 +22,12 @@ app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
-}
+};
 
 // if we're in production, serve client/build as static assets
-app.get('/',(req, res)) {
+app.get('/',(req, res) => {
   res.sendFile(path.join(__dirname, '../client/build'));
-}
+});
 
 //instatiate Apollo server
 const startApolloServer = async (typeDefs, resolvers) => {
