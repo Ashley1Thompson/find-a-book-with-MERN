@@ -3,7 +3,7 @@ import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'reac
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-import { SAVE_BOOK } from '../utils/mutation';
+import { SAVE_BOOK } from '../utils/mutations';
 
 
 
@@ -70,7 +70,7 @@ const SearchBooks = () => {
 
     try {
       const {data} =await saveBook({variables: {bookData: {...bookToSave}}})
-
+      Auth.login(data.saveBook.token);
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
